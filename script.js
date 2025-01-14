@@ -1,60 +1,51 @@
-let time = 60;
-let timer;
-let wordCount = 0;
-let isPlaying = false;
-
 const wordDisplay = document.getElementById('wordDisplay');
 const textInput = document.getElementById('textInput');
 const timerElement = document.getElementById('timer');
-const wpmElement = document.getElementById('wpm');
 const leaderboard = document.getElementById('leaderboard');
-const joinBtn = document.getElementById('joinBtn');
-const usernameInput = document.getElementById('username');
-const gameArea = document.getElementById('gameArea');
 
-joinBtn.addEventListener('click', () => {
-  const username = usernameInput.value.trim();
-  if (username) {
-    gameArea.style.display = 'block';
-    joinBtn.style.display = 'none';
-    usernameInput.style.display = 'none';
-    startGame();
-  }
-});
+let startTime;
+let timer;
+let isPlaying = false;
 
-function startGame() {
-  if (isPlaying) return;
-  isPlaying = true;
-  wordCount = 0;
-  textInput.value = '';
-  timer = setInterval(updateTimer, 1000);
-}
-
-function updateTimer() {
-  if (time <= 0) {
-    clearInterval(timer);
-    endGame();
-  } else {
-    time--;
-    timerElement.innerText = `Time: ${time}s`;
-  }
-}
-
-function endGame() {
-  isPlaying = false;
-  const wpm = wordCount;
-  wpmElement.innerText = `WPM: ${wpm}`;
-  alert(`Game over! Your WPM is ${wpm}.`);
-}
-
+// Start the game when the user begins typing
 textInput.addEventListener('input', () => {
-  if (!isPlaying) startGame();
+  if (!isPlaying) {
+    startTimer();
+  }
+
   const enteredText = textInput.value.trim();
   const displayedText = wordDisplay.innerText.trim();
 
+  // Check if the user has finished typing the displayed text
   if (enteredText === displayedText) {
-    wordCount += enteredText.split(' ').length;
-    textInput.value = '';
+    endGame();
   }
 });
+
+// Start the timer
+function startTimer() {
+  isPlaying = true;
+  startTime = Date.now();
+  timer = setInterval(() => {
+    const elapsedTime = ((Date.now() - startTime) / 1000).toFixed(2);
+    timerElement.innerText = `Time: ${elapsedTime}s`;
+  }, 10);
+}
+
+// Stop the timer and display the final time
+function endGame() {
+  clearInterval(timer);
+  isPlaying = false;
+  const finalTime = ((Date.now() - startTime) / 1000).toFixed(2);
+  alert(`You finished in ${finalTime} seconds!`);
+  updateLeaderboard(finalTime);
+  textInput.value = ''; // Clear the input for the next game
+}
+
+// Update the leaderboard with the latest time
+function updateLeaderboard(time) {
+  const listItem = document.createElement('li');
+  listItem.innerText = `Time: ${time}s`;
+  leaderboard.appendChild(listItem);
+}
 

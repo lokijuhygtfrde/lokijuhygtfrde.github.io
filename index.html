@@ -3,30 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Typing Speed Competition</title>
+  <title>Typing Speed Test</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>Typing Speed Competition</h1>
-    <input type="text" id="username" placeholder="Enter your name" />
-    <button id="joinBtn">Join Game</button>
-
-    <div id="gameArea" style="display:none;">
-      <p>Type the following text:</p>
-      <div class="word-display" id="wordDisplay">The quick brown fox jumps over the lazy dog</div>
-      <textarea id="textInput" placeholder="Start typing..."></textarea>
-      <div class="stats">
-        <p id="timer">Time: 60s</p>
-        <p id="wpm">WPM: 0</p>
-      </div>
+    <h1>Typing Speed Test</h1>
+    <p>Type the following text as quickly as possible:</p>
+    <div class="word-display" id="wordDisplay">The quick brown fox jumps over the lazy dog.</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typing Speed Test</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Typing Speed Test</h1>
+    <p>Type the following text as quickly as possible:</p>
+    <div class="word-display" id="wordDisplay">The quick brown fox jumps over the lazy dog.</div>
+    <textarea id="textInput" placeholder="Start typing..."></textarea>
+    <div class="stats">
+      <p id="timer">Time: 0.00s</p>
     </div>
-
     <h2>Leaderboard</h2>
     <ul id="leaderboard"></ul>
   </div>
 
-  <script src="/socket.io/socket.io.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

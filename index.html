@@ -1,12 +1,33 @@
 <!DOCTYPE html>
-<html>
-  <body>
-    <title>Video Player</title>
-    <center>
-      <h1>Welcome!</h1>
-      <video width=720 height=480 controls loop="" unmuted="" autoplay="">
-        <source src="https://github.com/lokijuhygtfrde/lokijuhygtfrde.github.io/raw/refs/heads/main/disicpline-2.mp4">
-      </video>
-    </center>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typing Speed Competition</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Typing Speed Competition</h1>
+    <input type="text" id="username" placeholder="Enter your name" />
+    <button id="joinBtn">Join Game</button>
+
+    <div id="gameArea" style="display:none;">
+      <p>Type the following text:</p>
+      <div class="word-display" id="wordDisplay">The quick brown fox jumps over the lazy dog</div>
+      <textarea id="textInput" placeholder="Start typing..."></textarea>
+      <div class="stats">
+        <p id="timer">Time: 60s</p>
+        <p id="wpm">WPM: 0</p>
+      </div>
+    </div>
+
+    <h2>Leaderboard</h2>
+    <ul id="leaderboard"></ul>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+</body>
 </html>
+
